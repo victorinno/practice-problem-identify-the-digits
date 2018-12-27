@@ -39,9 +39,9 @@ dev_labels = dev_test_labels[0:int(0.5*len(dev_test_labels))]
 test_labels = dev_test_labels[int(0.5*len(dev_test_labels)):]
 
 
-train_shape = (len(train_addrs), 784, 3)
-dev_shape = (len(dev_addrs), 784, 3)
-test_shape = (len(test_addrs), 784, 3)
+train_shape = (len(train_addrs), 28,28,3)
+dev_shape = (len(dev_addrs), 28,28, 3)
+test_shape = (len(test_addrs), 28,28, 3)
 
 f = h5py.File(hdf5_path, mode='w')
 
@@ -68,7 +68,7 @@ for i in range(len(train_addrs)):
     addr = train_addrs[i]
     image = Image.open(addr,'r')
     image = image.convert('RGB')
-    train = np.array(image.getdata())
+    train = np.array(image)
     #flat_data = pixel_values.reshape(pixel_values.shape[0], -1).T
     #train = flat_data / 255.
     f["train_img"][i, ...] = train 
@@ -81,7 +81,7 @@ for i in range(len(dev_addrs)):
     addr = train_addrs[i]
     image = Image.open(addr,'r')
     image = image.convert('RGB')
-    train = np.array(image.getdata())
+    train = np.array(image)
     #flat_data = pixel_values.reshape(pixel_values.shape[0], -1).T
     #train = flat_data / 255.
     f["dev_img"][i, ...] = train 
@@ -94,7 +94,7 @@ for i in range(len(test_addrs)):
     addr = train_addrs[i]
     image = Image.open(addr,'r')
     image = image.convert('RGB')
-    train = np.array(image.getdata())
+    train = np.array(image)
     #flat_data = pixel_values.reshape(pixel_values.shape[0], -1).T
     #train = flat_data / 255.
     f["test_img"][i, ...] = train 
