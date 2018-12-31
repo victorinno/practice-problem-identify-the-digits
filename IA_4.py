@@ -64,15 +64,15 @@ test_generator = test_datagen.flow_from_directory(
     seed=42
 )
 
-result_generator = test_datagen.flow_from_directory(
-    directory=r"./data/final/test/",
-    target_size=(28,28),
-    color_mode="rgb",
-    batch_size=1,
-    class_mode=None,
-    shuffle=False,
-    seed=42
-)
+#result_generator = test_datagen.flow_from_directory(
+#    directory=r"./data/final/test/",
+#    target_size=(28,28),
+#    color_mode="rgb",
+#    batch_size=1,
+#    class_mode=None,
+#    shuffle=False,
+#    seed=42
+#)
 
 def softMaxAxis1(x):
     return keras.activations.softmax(x,axis=1)
@@ -128,16 +128,16 @@ results=pd.DataFrame({"Filename":filenames,
                       "Predictions":predictions})
 results.to_csv("results.csv",index=False)
 
-result_generator.reset()
-pred_result=model.predict_generator(result_generator,verbose=1)
-
-predicted_class_indices=np.argmax(pred_result,axis=1)
-
-labels = (train_generator.class_indices)
-labels = dict((v,k) for k,v in labels.items())
-predictions = [labels[k] for k in predicted_class_indices]
-
-filenames=test_generator.filenames
-results=pd.DataFrame({"Filename":filenames,
-                      "Predictions":predictions})
-results.to_csv("results.csv",index=False)
+#result_generator.reset()
+#pred_result=model.predict_generator(result_generator,verbose=1)
+#
+#predicted_class_indices=np.argmax(pred_result,axis=1)
+#
+#labels = (train_generator.class_indices)
+#labels = dict((v,k) for k,v in labels.items())
+#predictions = [labels[k] for k in predicted_class_indices]
+#
+#filenames=test_generator.filenames
+#results=pd.DataFrame({"Filename":filenames,
+#                      "Predictions":predictions})
+#results.to_csv("results.csv",index=False)
