@@ -46,55 +46,55 @@ print(stats.itemfreq(labels[0:int(0.25*len(arquivos_train))]))
 print(stats.itemfreq(labels[int(0.25*len(arquivos_train)):int(0.50*len(arquivos_train))]))
 print(stats.itemfreq(labels[int(0.50*len(arquivos_train)):int(0.75*len(arquivos_train))]))
 print(stats.itemfreq(labels[int(0.75*len(arquivos_train)):]))
-#f = h5py.File(hdf5_path, mode='w')
-#
-#f.create_dataset("train_img", train_shape, np.uint8)
-##f.create_dataset("dev_img", dev_shape, np.uint8)
-#f.create_dataset("test_img", test_shape, np.uint8)
-#
-## the ".create_dataset" object is like a dictionary, the "train_labels" is the key. 
-#f.create_dataset("train_labels", (len(train_addrs),), np.uint8)
-#f["train_labels"][...] = train_labels
-#
-##f.create_dataset("dev_labels", (len(dev_addrs),), np.uint8)
-##f["dev_labels"][...] = dev_labels
-#
-#f.create_dataset("test_labels", (len(dev_test_labels),), np.uint8)
-#f["test_labels"][...] = dev_test_labels
-#
-#
-#for i in range(len(train_addrs)):
-#  
+f = h5py.File(hdf5_path, mode='w')
+
+f.create_dataset("train_img", train_shape, np.uint8)
+#f.create_dataset("dev_img", dev_shape, np.uint8)
+f.create_dataset("test_img", test_shape, np.uint8)
+
+# the ".create_dataset" object is like a dictionary, the "train_labels" is the key. 
+f.create_dataset("train_labels", (len(train_addrs),), np.uint8)
+f["train_labels"][...] = train_labels
+
+#f.create_dataset("dev_labels", (len(dev_addrs),), np.uint8)
+#f["dev_labels"][...] = dev_labels
+
+f.create_dataset("test_labels", (len(dev_test_labels),), np.uint8)
+f["test_labels"][...] = dev_test_labels
+
+
+for i in range(len(train_addrs)):
+  
+    if i % 1000 == 0 and i > 1:
+        print ('Train data: {}/{}'.format(i, len(train_addrs)) )
+    
+    addr = train_addrs[i]
+    image = Image.open(addr,'r')
+    image = image.convert('L')
+    train = np.array(image).reshape(28,28)
+    f["train_img"][i, ...] = train 
+
+#for i in range(len(dev_addrs)):
+  
 #    if i % 1000 == 0 and i > 1:
-#        print ('Train data: {}/{}'.format(i, len(train_addrs)) )
-#    
+#        print ('Dev data: {}/{}'.format(i, len(dev_addrs)) )
+    
 #    addr = train_addrs[i]
 #    image = Image.open(addr,'r')
 #    image = image.convert('L')
 #    train = np.array(image).reshape(28,28)
-#    f["train_img"][i, ...] = train 
-#
-##for i in range(len(dev_addrs)):
-#  
-##    if i % 1000 == 0 and i > 1:
-##        print ('Dev data: {}/{}'.format(i, len(dev_addrs)) )
-#    
-##    addr = train_addrs[i]
-##    image = Image.open(addr,'r')
-##    image = image.convert('L')
-##    train = np.array(image).reshape(28,28)
-##    f["dev_img"][i, ...] = train 
-#
-#for i in range(len(dev_test_addrs)):
-#  
-#    if i % 1000 == 0 and i > 1:
-#        print ('Test data: {}/{}'.format(i, len(dev_test_addrs)) )
-#    
-#    addr = train_addrs[i]
-#    image = Image.open(addr,'r')
-#    image = image.convert('L')
-#    train = np.array(image).reshape(28,28)
-#    f["test_img"][i, ...] = train 
-#    
-#    
-#f.close()
+#    f["dev_img"][i, ...] = train 
+
+for i in range(len(dev_test_addrs)):
+  
+    if i % 1000 == 0 and i > 1:
+        print ('Test data: {}/{}'.format(i, len(dev_test_addrs)) )
+    
+    addr = train_addrs[i]
+    image = Image.open(addr,'r')
+    image = image.convert('L')
+    train = np.array(image).reshape(28,28)
+    f["test_img"][i, ...] = train 
+    
+    
+f.close()

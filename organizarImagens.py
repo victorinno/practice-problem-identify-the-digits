@@ -14,8 +14,10 @@ import shutil
 import os
 
 img_train_path = "./Images/train/*.png"
+img_test_path = "./Images/test/*.png"
 
 arquivos_train = glob.glob(img_train_path)
+arquivos_test = glob.glob(img_test_path)
 
 labels = np.genfromtxt('train.csv', delimiter=',',skip_header =1 )[:,1]
 
@@ -46,5 +48,12 @@ for i in range(len(test_addrs)):
     if not os.path.exists(folder):
         os.makedirs(folder)
     shutil.copy(test_addrs[i], folder)
+
+for i in range(len(arquivos_test)):
+    folder = 'data/final/test'
+    if not os.path.exists(folder):
+        os.makedirs(folder)
+    shutil.copy(arquivos_test[i], folder)
  
-    
+
+ 
