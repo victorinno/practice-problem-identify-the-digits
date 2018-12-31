@@ -16,6 +16,9 @@ from keras.layers import Conv2D, MaxPooling2D
 from keras.layers import Activation, Dropout, Flatten, Dense
 import keras
 
+#https://medium.com/@vijayabhaskar96/tutorial-image-classification-with-keras-flow-from-directory-and-generators-95f75ebe5720
+#https://blog.keras.io/building-powerful-image-classification-models-using-very-little-data.html
+
 K.set_image_dim_ordering('th')
 
 
