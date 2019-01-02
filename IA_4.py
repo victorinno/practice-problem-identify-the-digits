@@ -118,18 +118,18 @@ valid_generator.reset()
 model.evaluate_generator(generator=valid_generator, steps=len(valid_generator))
 
 test_generator.reset()
-pred=model.predict_generator(test_generator,verbose=1)
+pred=model.predict_generator(test_generator,verbose=1, steps=len(valid_generator))
 
 predicted_class_indices=np.argmax(pred,axis=1)
 
 labels = (train_generator.class_indices)
 labels = dict((v,k) for k,v in labels.items())
-predictions = [labels[k] for k in predicted_class_indices]
+#predictions = [labels[k] for k in predicted_class_indices]
 
-filenames=test_generator.filenames
-results=pd.DataFrame({"Filename":filenames,
-                      "Predictions":predictions})
-results.to_csv("results.csv",index=False)
+#filenames=test_generator.filenames
+#results=pd.DataFrame({"Filename":filenames,
+#                      "Predictions":predictions})
+#results.to_csv("results.csv",index=False)
 
 #result_generator.reset()
 #pred_result=model.predict_generator(result_generator,verbose=1)
